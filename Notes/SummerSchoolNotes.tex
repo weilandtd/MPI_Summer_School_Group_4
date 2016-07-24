@@ -1,0 +1,211 @@
+\documentclass[hyperref]{labbook}
+
+%\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{tikz}
+
+\numberwithin{equation}{experiment}
+\numberwithin{table}{experiment}
+\numberwithin{figure}{experiment}
+
+%Formatting of the Code Parts 
+\definecolor{maroon}{rgb}{0.5,0,0}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+\lstdefinelanguage{XML}
+{
+  basicstyle=\ttfamily\footnotesize,
+  morestring=[b]",
+  moredelim=[s][\bfseries\color{cyan}]{<}{\  },
+  moredelim=[s][\bfseries\color{cyan}]{</}{>},
+  moredelim=[l][\bfseries\color{cyan}]{/>},
+  moredelim=[l][\bfseries\color{cyan}]{>},
+  morecomment=[s]{<?}{?>},
+  morecomment=[s]{<!--}{-->},
+  commentstyle=\color{orange},
+  stringstyle=\color{red},
+  identifierstyle=\color{darkgreen}
+}
+
+
+\begin{document}
+
+\numberwithin{lstlisting}{experiment}
+\labday{24.07.2016}
+\experiment{Dynamic systems modeling}
+System: a potential source o data
+\begin{itemize}
+\item{\color{red} boundary }
+\item inputs / outputs
+\end{itemize}
+Experiments: Extracting data from a system 
+\begin{itemize}
+\item apply condition to input and observe outputs
+(Obeservability / Controlability)
+\end{itemize}
+Model: of a system {\color{red} and an experiment is anything} to which exp can be applied.
+This is results in an experimental frame of the model. A model in the general case doesn't need to be mathematical or computational. No model is valid for all experiments but the system itself.
+The purpose of modeling is to simply. "All models are wrong but some of them are useful" \\[1em]
+Simulation: Perform the experiment on the model. \\[1em]
+Continuity: 
+\begin{itemize}
+\item Discrete and Deterministic  (Molecular Dynamics)
+\item {\color{red} Continuous  and Deterministic (Partial differential equations)}
+\item Discrete and Stochastic  (Agent based models)
+\item Continuous  and Stochastic (Stochastic differential equations) 
+\end{itemize}
+
+The continuum limit assumes the changes of a single molecular does not matter for the overall concentration in the region of the length scale  $\lambda$. 
+The length scale $L$ field gradients are established  \\
+\begin{equation}
+\mathrm{Kn} := \frac{\lambda}{L} 
+\end{equation}•
+If $\mathrm{Kn} << 1 $ the continuum assumption is justified. \\[1em]
+Extensive quantities: depend on the system size.(Mass, Volume, molecules \dots) \\
+Intensive quantities: do not depend on the system size (Temperature, concentration \dots). \\[1em]
+Differential equations are always expressed in terms of intensive quantities in simulation needs to use extensive quantities. This is not necessary but helpful to design the simulation experiment properly. \newpage
+Dimensional Analysis: 
+\begin{itemize}
+\item dependence of variables (Which are the important variables?)
+\item orders of magnitude
+\item Model - System similitude (Where show model and system same dynamics?)
+\end{itemize}
+Dim:   Mass, length, time, force,  \dots\\
+Units: kg, lb \dots \\[1em]
+Theorem:\\
+All dimensions are power series of 6 basic dimensions.
+\begin{itemize}
+\item mass M
+\item length L 
+\item time T 
+\item temperature $\theta$
+\item charge C
+\item resistance R
+\end{itemize}
+Example: $force = M^1L^1T^{-1}$\\[1em]
+Buckingham Theorem:\\
+If n is the number of basic dimensions  and p variables of a system. The system is completely described by p-n dimensionless groupings. \\
+Example:\\
+A force acting on a point mass in vacuum: \\
+$n = 3 (\mathrm{M,L,T})$\\
+$p = 4 (\mathrm{m,F,t,v})$\\
+Therefore, the system is described by a single dimensionless quantity.\\[1em]
+All physical equations are dimensionally homogeneous: $A + B = C $. The dimensions of A, B and C needs to be the same. \\[1em]
+Taylor (1979) proposed and algorithm to find the dimensionless groupings of a system. \\
+Example:\\
+Shear stress on red blood cell traveling with a velocity $u$ though an artery. If the shear stress $\tau$ is to hight the blood cell would be destroyed. The shear stress then depends on the distance from the wall $h$, the viscosity $\eta$, the density $\rho$ and the velocity $u$.\\[1em]
+$n = 3 (M,L,T)$\\
+$p = 4 (\eta,\rho,h,\tau,u)$\\
+
+\begin{equation}
+\begin{matrix}
+          & M & L & T \\
+\hline
+h       & 0  & 1 & 0 \\
+u       & 0  & 1 & -1 \\
+\eta & 1 & -1 & -1 \\
+\rho & 1  & -3 & 0 \\
+\tau & 1  & -1 & -2 \\
+\end{matrix} \rightarrow
+\begin{matrix}
+          & M & L & T \\
+\hline
+h       & 0  & 1 & 0 \\
+u       & 0  & 1 & -1 \\
+\eta & 0 &  2 & -1 \\
+\rho & 1  & -3 & 0 \\
+\tau & 0  & 2 & -2 \\
+\end{matrix}
+\rightarrow
+\begin{matrix}
+           & L & T \\
+\hline
+h         & 1 & 0 \\
+u         & 1 & -1 \\
+\eta/\rho u &  1 &0 \\
+\tau/\rho u^2  &0 & 0 \\
+\end{matrix}
+\rightarrow
+\begin{matrix}
+           & L  \\
+\hline
+\eta/\rho u h&  0 \\
+\tau/\rho u^2  &0 \\
+\end{matrix}
+\end{equation}
+The dimensionless numbers are then $\Pi_1 = \frac{\eta}{\rho u h}$ and $\Pi_1 = \frac{\tau}{\rho u^2}$.\\
+We also know that: $\Pi_1 = f(\Pi_2 )$ this helps us to design an experiment because only the dimensionless numbers need to be varied to understand the function the relates  $\Pi_1$ and $\Pi_2$ \\[2em]
+Modeling Dynamics:\\[0.5em]
+1) Define the system boundaries and the input and outputs\\
+2) Identify reservoirs (for any quantity) of relevant time scales \\
+3) Formulate equations for the flows to the reservoirs. \\All flows have the form $flow = f(activating level - inhibiting level)$. \\
+4) Formulate the balance equations for the reservoirs. $\frac{d}{dt}level = \sum inflows - \sum outflows $
+5) Simplify the system of equations\\
+6) Solving the systems will give $level(t)$\\
+7) Identify unknown parameters based on the given data\\
+8) {\color{red} Validate the model}. Prove that the model can predict another experiment!\\[1em]
+\experiment{Recap of vector calculus}
+
+\experiment{Spatiotemporal models}
+Control volumes:\\
+Discretization of space into finite small volumes. Considering that the control volumes can vary with time the rate of change of the intensive variable $f$. For being the density $f = m/V$:
+\begin{equation}
+\frac{df}{dt} = \frac{1}{V}\frac{dm}{dt} + \frac{m}{V}\frac{1}{V}\left( -\frac{dV}{dt}\right)
+\end{equation}•\\[1em]
+Fixes control volumes / Eulerian :\\
+When using fixed control volumes the flow between the control volumes $V_i$ is define by the field derivative: 
+ \begin{equation}
+\frac{\partial f(x,t)}{\partial t }|_{x=const} = D\nabla^2f - \nabla \cdot (f \cdot \mathbf{v}(\mathbf{r},t)) + k(f)
+\end{equation}
+Co-moving control volume / Lagrangian: \\
+When considering moving volumes the flow of the intensive quantity is given by the material derivative: 
+\begin{equation}
+\frac{\mathrm{d}f}{\mathrm{d}t} = \frac{\partial}{\partial t} \left[f(\mathbf{r}(r), t ) \right] = \nabla f \cdot \frac{\partial  \mathbf{r}(t)}{\partial t} + \frac{\partial f }{\partial t}
+\end{equation}\\[1em]
+For considering mass conservation: 
+\begin{equation}
+m = \int f \mathrm{d}V  
+\end{equation}•
+\begin{equation}
+\frac{\mathrm{d}m}{\mathrm{d}t} = 0 
+\end{equation}
+Inserting the derivative above leads to the Reynolds transport theorem:
+\begin{equation}
+\frac{\mathrm{d}m}{\mathrm{d}t} =  \int_V \frac{\partial f }{\partial t} \mathrm{d }V + \int_V f \mathbf{v}\cdot \mathbf{n} dS
+\end{equation}
+Infinitesimal control volumes:
+For  $V \rightarrow 0 $ the 
+Conservation: 
+\begin{equation}
+\frac{\mathrm{d}m}{\mathrm{d}t} = 0  
+\end{equation}•
+translate Lagrange to Eulerian: 
+\begin{equation}
+\frac{\mathrm{d}m}{\mathrm{d}t}  = \int_V \frac{\partial f }{\partial t} \mathrm{d}V +  \int_V f \mathbf{v}\cdot \mathbf{n} dS
+\end{equation}
+With the  field $\mathbf{v}$ Fick's law is defined as:
+\begin{equation}
+f \cdot \mathbf{v} = -{D} \nabla f
+\end{equation}
+Where D is Diffusion tensor with the elements $D_{ij} ,[i,j]  \{x,y,z\}$
+Insertion of the the relations derived above gives: 
+\begin{equation}
+\frac{\mathrm{d}m}{\mathrm{d}t}  = \int_V \left[ \frac{\partial f }{\partial t } - \nabla (D\nabla f) \right]\mathrm{d}V = 0
+\end{equation}
+This relation recovers Fick's second law:
+\begin{equation}
+\frac{\partial f}{\partial t} = D \Delta f
+\end{equation}\\[1em]
+Conclusion: \\
+In an Eulerian description the formulation of the advective transport needs to be addressed with the term $ - \nabla \cdot (f \cdot \mathbf{v}(\mathbf{r},t))$. This can be avoided using a Largangian formalism as the convective transport is described by the movement of the control volumes  
+ 
+\end{document} 
