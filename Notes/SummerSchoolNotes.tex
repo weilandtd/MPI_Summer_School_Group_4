@@ -230,5 +230,76 @@ Example: John Conway's Game of Life\\
 Birth: if cell is empty and has exactly three living neighbors  \\
 Survival: if cell is living and has two or three living neighbors \\
 Death: else ?    ... 
+\newpage
+\experiment{Particle Methods}
+Discretization: \\
+Physical quantities are usually present as continuous fields. In computer simulation the fields needs to be sampled at "representative points". The required resolution is determined by the field limit $L$ and the continuous limit $\lambda$.
+\begin{equation}
+\lambda < \Delta x < L  \rightarrow \Delta x < \frac{2}{a}
+\end{equation}
+where $a = max(Eig.val.)$. The discretization method can be structured or unstructured. Possible methods are:
+\begin{itemize}
+\item Finite Differences, 1D Grid
+\item Finite Elements,  2D Triangles
+\item Finite Volumes, 3D Volumes 
+\item Particle Methods, 0D Points
+\end{itemize}
+Particles as reservoirs: Every particle is a reservoir and interchange its interchanging flows with it surrounding particles. \\[1em]
+Particle methods:\\
+In terms of discretization particle methods are very suited for the simulation of biological system because its easy to from complex geometry.\\ 
+A Particle is a set $(\mathbf{r}, \{ w_1 , w_1 \dots \})$ where $\mathbf{r}$ is the position and $w_i$ are arbitrary variables. 
+\begin{equation}
+\frac{\mathrm{d}\mathbf{r}}{\mathrm{d}t}  =  \sum_{q = 1}^N K(\mathbf{r}, \{ w_1 , w_1 \dots \})
+\end{equation}
+\begin{equation}
+\frac{\mathrm{d}\mathbf{w}}{\mathrm{d}t} = \sum_{q = 1}^N F(\mathbf{r}, \{ w_1 , w_1 \dots \})
+\end{equation}
+In General the implementation of particle methods is always the same only the functions $K$ and $F$ need to be provided. \\
+Libraries: PPM, Puma .. .\\[1em]
+Solve a differential equation: \\
+\begin{equation}
+\frac{\mathrm{d}u}{\mathrm{d}t} = f
+\end{equation}
+First possibility to compute the solution is discretization of the equation and then numerical integration. Therefore, the consistency is crucial for discretization and numerical stability for the actual computation. This methods is called intensive solution. 
+\begin{equation}
+\frac{u_n - u_{n-1}}{\delta t} = f_{n-1} \rightarrow u_n = u_{n-1} + \delta t f_{n-1}
+\end{equation}
+Second possibility express the differential equation as an integral and then compute this integral numerically. In contrast to the first possibility the expression of the integral is exact numerical error is only exhibited by computation of the integral (stability is not an issue). This method is called is intensive. 
+\begin{equation}
+u = \int f(t ) dt \rightarrow u = \sum w_i f(x_i)
+\end{equation}
+Numerical stability can be derived for a simple first order equation solved with the Euler scheme as :
+\begin{equation}
+\frac{x_n - x_{n-1}}{\delta t} = -\lambda x_{n-1}
+\end{equation}
+is stable for 
+\begin{equation}
+|1- \lambda t| < 1 \rightarrow  0 <\delta t < \frac{2}{\lambda}
+\end{equation}
+Particle Function Approximation: \\
+\begin{equation}
+u(x) = \int_\Omega u(y) \delta(x-y) dy =   \int_\Omega u(y) \xi(x-y) dy + \mathcal{O}(\epsilon^r)
+\end{equation}
+where $\xi$ is a smoothing function the is similar to delta 
+\begin{equation}
+\xi_{\epsilon} = \frac{1}{\epsilon}\xi\left(\frac{x}{\xi}\right)
+\end{equation}
+If we consider the space discretized with the particle positions $x_p$
+\begin{equation}
+u(x)  \approx  \sum_\Omega u(x_p) \xi(x-x_p) V_p = \sum_{p  = 1}^N \omega_p \xi(x-x_p)+ \mathcal{O}\left( \frac{h}{\epsilon}\right)^S
+\end{equation}
+Choosing $\xi$ will determine  $\mathcal{O}(\epsilon^r)$ where $r$ is the $r$th  moment that differs from the delta function. Thus for a Gaussian function $r = 2$. The error  $\mathcal{O}\left( \frac{h}{\epsilon}\right)^S$ where $S$ is the smoothness of the function defined be the $n$th defined derivative. For a Gaussian function this l eads to $S \rightarrow \infty $ therefore the discretization length $h$ of the particles is required to be smaller than $\epsilon$. This leads to an overlap of particles. This leads to smoothed particle methods. \\[1em]
+Remeshig: \\
+Use a gird with the a grid size $a < \epsilon$.If the the overlap condition is violated:  Interpolate the values to the mesh nodes. Delete the particles. Reinitialize particles at the mesh points. Therefore, the discretization is adaptive.\\ 
+As the smoothing function was designed to conserve the first two moments, an interpolation methods is desired the conserve this moments. A interpolation scheme of an arbitrary order convolved with itself will give the interpolation scheme of the next higher order. This a methods conserving moments to the order of 3 is given by: \\ 
+\begin{equation}
+M'(s ) = \begin{cases}  1 - \frac{1}{2}(5s^2 -  3 s^3)  & 0\leq s \leq 1 \\ \frac{1}{2} (2-s)^2(-s) & 1 \leq s \leq 2 \\ 0 & s > 2  \end{cases} \; \text{where} \; s = \frac{|x_p - x_m|}{h}
+\end{equation}
+To compute the interactions in between $N$ particle pairs has a complexity of $\nu(N^2)$. But if the function $F$ only changes the particle locally the complexity reduces to $\nu(N)$. If $F$ is global a method 1984 Barnes \& Hut can compute all interaction with a complexity  $\nu(Nlog(N))$. The idea is to cluster particles into cells and compute the interaction of the particles with its nearby particle and the interaction with the clusters. Another method proposed by Greengaard \& Roklin 1989 reduces this further $\nu(N)$. The Greengaard \& Roklin let only representative cluster interact with each other.\\[1em]
+Cell List: \\
+Create a grid with the grid size of the cutoff radius $r_c$. You loop over every particle and you get the index of the cell $i = Int(x_p/r_c)$. In a next step the particle is added to the list of this cells. To read out the nearest neighbors of the particle all particles in the particles cell and and the cells neighbors.\\[1em]
+Verlet list: \\ 
+Every particle caries a list of interacting particles. Therefore, the Verlet list  uses a slightly larger cutoff radius than the cell list it is created from. As long as no particle moves in this skin the same Verlet list can be used for the particle and the list doesn't need to be constructed. \\[1em]
 \end{document} 
+
 

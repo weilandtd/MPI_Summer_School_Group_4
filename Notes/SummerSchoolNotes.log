@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.10.14)  25 JUL 2016 11:28
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.10.14)  25 JUL 2016 13:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -751,28 +751,42 @@ Missing character: There is no ¢ in font cmr10!
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ¢ in font cmr10!
- [4]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 233.
- [5
+ [4] [5
 
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 233.
+Underfull \hbox (badness 10000) in paragraph at lines 256--260
+
+ []
+
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 278--280
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 290--295
+
+ []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 303.
+[7] [8]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 303.
  (./SummerSchoolNotes.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 233.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 233.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 303.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 303.
 Package rerunfilecheck Info: File `SummerSchoolNotes.out' has not changed.
-(rerunfilecheck)             Checksum: 1C7DDFCE982C82FB8E87DEC04378BEB3;378.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 233.
+(rerunfilecheck)             Checksum: 880A4E0264B0CB1756A2C9E5F21C228E;444.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 303.
  ) 
 Here is how much of TeX's memory you used:
- 17279 strings out of 495028
- 302784 string characters out of 6181496
+ 17297 strings out of 495028
+ 303027 string characters out of 6181496
  430449 words of memory out of 5000000
- 20153 multiletter control sequences out of 15000+600000
+ 20155 multiletter control sequences out of 15000+600000
  9522 words of font info for 34 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 65i,9n,71p,407b,355s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 65i,9n,71p,642b,355s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texl
@@ -784,10 +798,10 @@ lic/amsfonts/cm/cmsl10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmsy8.pfb>
-Output written on SummerSchoolNotes.pdf (5 pages, 129297 bytes).
+Output written on SummerSchoolNotes.pdf (8 pages, 145865 bytes).
 PDF statistics:
- 122 PDF objects out of 1000 (max. 8388607)
- 102 compressed objects within 2 object streams
- 27 named destinations out of 1000 (max. 500000)
- 61 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 157 PDF objects out of 1000 (max. 8388607)
+ 134 compressed objects within 2 object streams
+ 43 named destinations out of 1000 (max. 500000)
+ 69 words of extra memory for PDF output out of 10000 (max. 10000000)
 
