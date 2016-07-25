@@ -207,5 +207,28 @@ This relation recovers Fick's second law:
 \end{equation}\\[1em]
 Conclusion: \\
 In an Eulerian description the formulation of the advective transport needs to be addressed with the term $ - \nabla \cdot (f \cdot \mathbf{v}(\mathbf{r},t))$. This can be avoided using a Largangian formalism as the convective transport is described by the movement of the control volumes  
- 
+ \labday{24.07.2016}
+\experiment{Cellular Automata}
+Simple model of complex systems: Simple rules between the finite control volumes can reproduce the complex behavior exhibited by the differential equations. The complex behavior emerges of the population of interacting control volumes. The emerging behavior is lost when isolating the components. \\[1em]
+Example: Self organization of heart cells. \\[1em]
+Definition of the CA: 
+\begin{itemize}
+\item Discrete space, lattice or cells (nodes and sites ) 
+\item States: a discrete - typically small set of states that characterize the cells 
+\item Neighborhood: cells that interact with the ith cell  
+\item Update rules 
+\end{itemize}
+Types of update rules: 
+\begin{itemize}
+\item Deterministic (Eularian) 
+\item Stochastic: Execution of the rule has a probability  
+\item Lattice Gas CA for moving cells 
+\item Solidification CA with absorbing state for architectural models e.g. branching morphogenesis
+\end{itemize}
+Example: John Conway's Game of Life\\
+2D System with two sates and three rules: Birth, Survival and Death. \\
+Birth: if cell is empty and has exactly three living neighbors  \\
+Survival: if cell is living and has two or three living neighbors \\
+Death: else ?    ... 
 \end{document} 
+
