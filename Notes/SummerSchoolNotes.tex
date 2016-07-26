@@ -300,6 +300,251 @@ Cell List: \\
 Create a grid with the grid size of the cutoff radius $r_c$. You loop over every particle and you get the index of the cell $i = Int(x_p/r_c)$. In a next step the particle is added to the list of this cells. To read out the nearest neighbors of the particle all particles in the particles cell and and the cells neighbors.\\[1em]
 Verlet list: \\ 
 Every particle caries a list of interacting particles. Therefore, the Verlet list  uses a slightly larger cutoff radius than the cell list it is created from. As long as no particle moves in this skin the same Verlet list can be used for the particle and the list doesn't need to be constructed. \\[1em]
+\experiment{Simulation of Diffusion}
+Mesoscopic picture: Consider microscopic phenomena on a macroscopic length scale. We consider the probability of a particle to change its position with in the time interval $\delta t$. The probability density function of the particle to be a the position $x$ is then: 
+\begin{equation}
+P(x,t+\delta t ) )  = q_{+} P(x-\delta x , t) + q_{-} P(x+\delta x , t)+P(x,t)[1-(q_{-}+q_{+}  )]
+\end{equation}
+where $q$ is the transition property and P is a probability density function. Using the second order Taylor expansion:
+\begin{equation}
+ P(x,t) + \delta t \frac{\partial P }{\partial t} +\frac{ \delta t ^2 }{2!} \frac{\partial^2 P}{\partial t ^2} + \mathcal{O}(\delta t ^3) =  q_{+} \left[  P(x , t)  - \delta x  \frac{\partial p}{\partial }    \right]+ q_{-} P(x+\delta x , t)+P(x,t)[1-(q_{-}+q_{+}  )] 
+\end{equation}•
+For $\delta t \rightarrow 0$
+\begin{equation}
+\frac{\partial P}{\partial t} = \frac{\partial P}{\partial x} \left [ \frac{q_{-}  \delta x - q_{+} \delta x  }{\delta t } \right] + \frac{\partial ^2P}{\partial^2x} \left [ \frac{\delta x^2}{2}\frac{q_{-}  + q_{+} \delta  }{\delta t } \right]+\mathcal{O}(\delta t ^3)
+\end{equation}
+Partial stochastic equation: 
+\begin{equation}
+\frac{\partial P}{\partial t } = V \frac{\partial P}{\partial x }  +D \frac{\partial^2 P}{\partial t^2 } 
+\end{equation}
+A solution for the probability density is : 
+\begin{equation}
+P(x|x_0, \delta t ) = \frac{1}{\sqrt{4\pi D \delta t}}e^{\frac{-(x-x_0)^2}{4D\delta t}}
+\end{equation}
+With the mean squared displacement of a particles can then be described as: 
+\begin{equation}
+\langle x^2(t) \rangle = 2Dt 
+\end{equation}
+The results can also be recovered for the random walk: 
+\begin{equation}
+x(t + \delta t ) = x(t) + r \sqrt{\delta t} ; r ~ N(0,2dD)
+\end{equation}
+Random walk Particle method: \\
+Consider a particle with its position $x_p$ and the number of molecules on the particle $w_p = u^0(x_p) V_p $
+\begin{equation}
+x_p (t_i+ \Delta t ) \leftarrow x_p(t_i) + \mathbf{r} \sqrt{\Delta t}
+\end{equation}
+Using the random walk the diffusion equation is sufficiently described therefore:
+\begin{equation}
+\frac{\mathrm{d} w_p}{\mathrm{d}t} = 0
+\end{equation}
+Continuum:\\
+In a continuous description diffusion is described using the densities $u(x,t) \rightarrow$ Density or Concentration. The development in time can be recovered from Fick's law:
+\begin{equation}
+\frac{\partial u}{\partial t} = D \nabla^2 u 
+\end{equation}
+Where $D$ is not a function of space and time, and the fluid is isotropic and homogeneous. \\
+For the 1D diffusion the particle method for a contentious particle method (Particle Strength Exchange) is recovered from the PDE:
+\begin{equation}
+\frac{\partial u}{\partial t} = D \frac{\partial^2 u}{\partial x^2} 
+\end{equation}
+Expanding $u(x)$ with the taylor expansion: 
+\begin{equation}
+u(y) = u(x) + \frac{y-x}{1!}  \frac{\partial u}{\partial x} +  \frac{(y-x)^2}{2!} \frac{\partial^2 u}{\partial x^2}  + \dots
+\end{equation}
+\begin{equation}
+\int_\Omega [u(y) - u(x)] \eta(y-x) dy = \int_\Omega \frac{y-x}{1!}  \frac{\partial u}{\partial x} \eta(y-x) dy  +   \int_\Omega\frac{(y-x)^2}{2!} \frac{\partial^2 u}{\partial x^2}  \eta(y-x) dy + \dots
+\end{equation}
+The Kernel  $\eta_\epsilon(\xi) = \frac{1}{\epsilon}\eta\left(\frac{\xi}{\epsilon}\right) $ shall be the delta function for $\epsilon \rightarrow 0 $
+\begin{equation}
+\int_\Omega [u(y) - u(x)] \eta(\xi) d\xi = \int_\Omega \frac{\xi}{\epsilon}  \frac{\partial u}{\partial x} \eta(\xi) d\xi  +   \int_\Omega\frac{\xi^2}{2\epsilon} \frac{\partial^2 u}{\partial x^2}  \eta(\xi) d\xi + \dots
+\end{equation}
+For the construction of the Kernel we choose: 
+\begin{equation}
+ \int \xi \eta(\xi) d\xi = 0 
+\end{equation}
+\begin{equation}
+ \int \xi^2 \eta(\xi) d\xi = 2
+\end{equation}
+\begin{equation}
+ \int \xi^s \eta(\xi) d\xi = 0; 3 \leq s \leq r +1 
+\end{equation}
+The gradient of $u(x)$ is then:
+\begin{equation}
+\frac{\partial^2 u}{\partial x^2}  \approx \frac{1}{\epsilon} \int_\omega [u(y) - u(x)] \eta_\epsilon(y-x) dy + \mathcal{O}(\epsilon^r)
+\end{equation}
+In terms of particles this is written as a sum: 
+\begin{equation}
+\frac{\partial^2 u_p}{\partial x^2}  = \frac{1}{\epsilon^2} \sum_{q=1}^N V_q [u_q - u_p] \eta_\epsilon(y-x) 
+\end{equation}
+In general the derivative of the order $\beta$ is given by:
+\begin{equation}
+\frac{\partial^\beta u_p}{\partial x^\beta}  = \frac{1}{\epsilon^\beta} \sum_{q=1}^N V_q [u_q \pm u_p] \eta^\beta_\epsilon(y-x) 
+\end{equation}
+A solution for the second derivative the one dimensional Kernel is 
+\begin{equation}
+\eta (\xi) = \frac{1}{2\sqrt{\pi}}e^{-\frac{xi^2}{4}}
+\end{equation}•
+A solution for the second derivative the three dimensional Kernel is 
+\begin{equation}
+\eta (\xi = \{x,y,z\}) = \frac{1}{(2\pi)^{3/2}}e^{-\frac{xi^2}{2}}
+\end{equation}
+Diffusion and Advection: \\[1em]
+The general equation considering advective and diffusive transport is:
+\begin{equation}
+\frac{\partial u}{\partial t} + \nabla \cdot(u V) = D\nabla^2u
+\end{equation}
+For incompressible fluids $\nabla \cdot V = 0$ holds. Thus the equation simplfies to 
+\begin{equation}
+\frac{\partial u}{\partial t} + V \cdot (\nabla u) = D\nabla^2u -  u (\nabla\cdot V)
+\end{equation}
+To derive the particle method it is required to express it in an Lagrangian framework:
+\begin{equation}
+\frac{dx_p}{dt} = V_p(x_p, t )
+\end{equation}•
+\begin{equation}
+\frac{du_p}{dt} = D\nabla^2 u_p - u_p(\nabla \cdot V) 
+\end{equation}
+\begin{equation}
+\frac{du_p}{dt} \approx \frac{D}{\epsilon^2} \sum_{q  = 1 }^N V_p(u_q - u_p) \eta_\epsilon(x_q - x_p) - u_p(\nabla \cdot V)_p
+\end{equation}
+For a two dimensions the system writes: 
+\begin{equation}
+(\nabla \cdot V)_p  = \frac{1}{\epsilon} \sum_{q = 1 }^N \Omega_q (V_{xq} + V_{xp}) \eta^{(1,0)}(x_p - x_q) + \frac{1}{\epsilon} \sum_{q = 1 }^N \Omega_q (V_{yq} + V_{yp}) \eta^{(0,1)}(y_p - y_q) + \mathcal{O}(\epsilon^3)
+\end{equation}
+With the kernels: 
+\begin{equation}
+\eta_\epsilon^{(1,0)}(x,y) = \frac{-2x}{\epsilon^2 \pi }e^{\frac{x^2+y^2}{\epsilon^2}}
+\end{equation}•
+\begin{equation}
+\eta_\epsilon^{(0,1)}(x,y) = \frac{-2y}{\epsilon^2 \pi }e^{\frac{x^2+y^2}{\epsilon^2}}
+\end{equation}
+\begin{equation}
+\frac{dx_p}{dt} = V_p(x_p,t)
+\end{equation}
+To solve the equations in time a first order explicit Euler scheme can be implemented according to: 
+\begin{equation}
+x_p(t + \delta t ) = x_p(t) + \delta t V_p(x_p,t) + \mathcal{O}(\delta t^2)
+\end{equation}
+\begin{equation}
+u_p(t + \delta t ) = u_p(t) + \delta t ( \dots) + \mathcal{O}(\delta t^2)
+\end{equation}
+The maximal timestep $\delta t < c||\boldsymbol\nabla\boldsymbol V||_\infty^{-1} $ or also $\delta t < c \delta x /V$\\[1em]
+Chemical Reactions: \\
+Consider the reaction Network: \\
+\begin{equation}
+\phi \rightarrow A 
+\end{equation}
+\begin{equation}
+A+B \rightarrow C 
+\end{equation}
+\begin{equation}
+C \rightarrow \phi 
+\end{equation}
+With the rate constants $R_1$, $R_2$ and $R_3$ the reaction kinetics are described by: 
+\begin{equation}
+\frac{d[A]}{dt} = R_1 - R_2 [A][B]
+\end{equation}•
+\begin{equation}
+\frac{d[B]}{dt} = - R_2 [A][B]
+\end{equation}•
+\begin{equation}
+\frac{d[C]}{dt} = R_2 [A][B] - R_3 [C]
+\end{equation}•
+Using the explicit Euler scheme the evolution of the concentration of the concentration is given by:
+\begin{equation}
+[A](t+\delta t ) = [A](t) + (k_1- k_2 [A](t)[B](t)) \delta t
+\end{equation}• 
+Diffusion - Advection - Reaction Equation :\\
+Assume three chemical species $S_1$ , $S_2$ ,$S_3$, the system also exhibits a flow field $V$, the species have the diffusion constants $D_1$, $D_2$ and $D_3$. Assume the reaction network of \begin{equation}
+\phi \rightarrow S_1
+\end{equation}
+\begin{equation}
+S_1 + S_2 \rightarrow S_3
+\end{equation}
+\begin{equation}
+S_3 \rightarrow \phi 
+\end{equation}
+The general system is descibed by:
+\begin{equation}
+\frac{du_1}{dt} + \nabla\cdot(u_1 V)  = D_1\nabla^2u_1 + k_1 - k_2u_1u_2
+\end{equation}
+\begin{equation}
+\frac{du_2}{dt} + \nabla\cdot(u_2 V)  = D_2\nabla^2u_2 - k_2u_1u_2
+\end{equation}
+\begin{equation}
+\frac{du_2}{dt} + \nabla\cdot(u_3 V)  = D_3\nabla^2u_2 + k_2u_1u_2- k_3u_3
+\end{equation}
+A particle is now by described by its position $x_p$ and the three concentrations $u_1$, $u_2$ and $u_3$. In the lagrangian framework the equations read then: 
+\begin{equation}
+\frac{dx_p}{dt} = V_p 
+\end{equation}•
+\begin{equation}
+\frac{du_{1p}}{dt} = D_1\nabla^2u_{1p}- u_{1p}(\nabla\cdot V_p)   + k_1 - k_2u_{1p}u_{2p}
+\end{equation}
+\begin{equation}
+\frac{du_{2p}}{dt} = D_2\nabla^2u_{2p} - u_{2p}(\nabla\cdot V_p)    - k_2u_{1p}u_{2p}
+\end{equation}
+\begin{equation}
+\frac{du_{3p}}{dt} = D_3\nabla^2u_{3p} - u_{4p}(\nabla\cdot V_p)    + k_2u_{1p}u_{2p}- k_3u_{3p}
+\end{equation}
+\labday{26.07.2016}
+\experiment{Stability analysis}
+1. Temporal (ODE) models
+\begin{equation}
+\frac{d}{dt} \mathbf u(t) = \mathbf f ( \mathbf u (t) , k_i)
+\end{equation}
+Nullclines also called stationary states. Stable steady state with an unstable environment leads to oscillations. 
+A stationary state is found be setting all the fluxed to zero:
+\begin{equation}
+\frac{d}{dt}  u*(t) = 0 = \mathbf f (  u* (t) , k_i)
+\end{equation}
+With that we can construct the functions $f_1$ and $f_2$ in the form that $u^*_1 = f_1(u_2^*)$. The steady states at a given $u_i$ is then given by the intersections of the functions $f_1$ and $f_2$. The steady states for $u_2$ are found for a given parameter set. If the number of steady state change on the choice of parameters this is called bifurcation. \\
+To find the steady state the Jakobi-Matrix $J$ is derived for the function $\mathbf f(\mathbf u (t), k_i)$. In an fist order approximation the function $\mathbf f $ can then be expressen as:
+\begin{equation}
+ \mathbf f(\mathbf u (t), k_i) =  \mathbf f( \mathbf u*)  + J\cdot(\mathbf u (t) - \mathbf u*) + \mathcal O ((\mathbf u(t) - \mathbf u*)^2)
+\end{equation}•
+ \begin{equation}
+ \frac{d}{dt} (\mathbf u(t) - \mathbf u*)=  \mathbf f( \mathbf u*)  + J\cdot(\mathbf u (t) - \mathbf u*) + 
+\end{equation}
+With this we can use the general Ansatz  for a linear equation with the  eigenvalues $\lambda_i(k_i)$ of Jacobian $J$.
+\begin{equation}
+\mathbf u(t) - \mathbf u* = \sum_iA_i e^{\lambda_i t}
+\end{equation}•
+Stability of $\mathbf u*$ is given if all $\mathrm{Re}[\lambda_i]<0$. The bifurcation points are given for $\mathrm{Re}[\lambda_j]=0$ for one j. \\[1em]
+2. Spatiotemporal (PDE) models \\
+Consider a one dimensional system with a constant velocity $\mathbf v (\mathbf x ,t ) = v = const.$ the transport equations read then: 
+\begin{equation}
+\frac{\partial u(x,t)}{\partial t} = f(u) + D\frac{\partial^2 u(x,t)}{\partial x^2} - v   \frac{\partial u(x,t)}{\partial x}
+\end{equation}
+The steady steady state $u*$ is assumed to be uniform ${\partial u}{\partial t} = 0$ and ${\partial u}{\partial x} = 0$. In terms of the Taylor expansion $f(u)$ is expressed as:
+\begin{equation}
+f(u) = f(u*) + f_u|_{u*} \cdot (u-u*) + \mathcal{O}((u-u*)^2)
+\end{equation}
+Thus a gain the rate of change near $u*$ is given by:
+\begin{equation}
+\frac{\partial (u-u*)}{\partial t} = f_u(u-u*) + D\frac{\partial^2 (u-u*)}{\partial x^2} - v   \frac{\partial (u-u*)}{\partial x}
+\end{equation}
+Using a Fourier transform and an the trivial ansatz $u-u*$ reads
+\begin{equation}
+u-u* = \int_{-\infty}^{\infty} dk a_k e^{ikx} e^{\lambda_k t}
+\end{equation}•
+Insertion into the PDE leads to:
+\begin{equation}
+\lambda_k \int dk a_k e^{ikx} e^{\lambda_k t} = f_u \cdot \int dk a_k e^{ikx} e^{\lambda_k t}  + D(ik)^2\int dk a_k e^{ikx} e^{\lambda_k t} - V(ik)\int dk a_k e^{ikx} e^{\lambda_k t} 
+\end{equation}•
+Integration of $\int\dots dx  e^{ik'x}$  leads to $\delta(k-k')$ therefore 
+\begin{equation}
+a_k \lambda_k e^{\lambda_kt} = f_u a_k e^{\lambda_kt} + D(-k^2)a_k e^{\lambda_kt} - V(ik)a_k  e^{\lambda_kt} 
+\end{equation}•
+\begin{equation}
+\lambda_k  = f_u  + D(-k^2) - V(ik)
+\end{equation}•
+For the linearized equations we obtain then the solution: 
+\begin{equation}
+u(x,t) = u* + \int a_k e^{ik(x-vt)}e^{(f_u-Dk^2)t}
+\end{equation}•
+From the solution we can conclude that spatial patterns induced travel in space with the flow flied $x-vt$ and depending on the function $f_u$ and the diffusion these patterns decay of $f_u -Dk^2 < 0$ 
 \end{document} 
 
 
