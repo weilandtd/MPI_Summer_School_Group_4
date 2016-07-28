@@ -1,0 +1,60 @@
+#using PyCall
+using Plots
+using Sundials
+#PyPlot.svg
+
+x_e = 1.0
+x_rk4 = 1.0
+lam = 1.0
+dt = 1.8
+t = 0.0
+
+
+max = 100
+t_max = max*dt
+
+function rhs(t,x)
+    return -x*lam
+end
+
+t_ = zeros(max,1)
+x_e_comp = zeros(max,1)
+x_r_comp = zeros(max,1)
+
+
+#println(x_e_comp)
+
+t_[1] = 0.0
+x_e_comp[1] = x_e
+x_r_comp[1] = x_rk4
+
+for i = 2:max
+    #Time
+    t = t + dt
+    #Euler integration 
+    x_e = x_e + rhs(t,x_e)*dt
+    #RK4 integration 
+    k1 = rhs(t,x_rk4) 
+    k2 = rhs(t+dt*0.5, x_rk4+dt*0.5*k1)
+    k3 = rhs(t+dt*0.5, x_rk4+dt*0.5*k2)
+    k4 = rhs(t+dt, x_rk4+dt*k3)
+    x_rk4 = x_rk4 + dt/6.0 * (k1 + 2*k2 + 2*k3 + k4)
+    #Save values
+    
+    #println(i)
+    #println(x_e)
+    #println(x_rk4)
+    t_[i] = t
+    x_e_comp[i] = x_e
+    x_r_comp[i] = x_rk4 
+end
+
+
+plot(t_,x_e_comp, label = "Euler", color="blue" );
+plot!(t_,x_r_comp, label = "RK4"  , color="red", xlabel="time", ylabel="c(t)" )
+
+#plt.xlim([0,dt*max])
+
+savefig("Euler_RK4.svg")
+
+#eps("Euler_RK4")
