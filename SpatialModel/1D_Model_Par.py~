@@ -1,0 +1,31 @@
+import numpy as np 
+from matplotlib import plot as plt
+
+
+#Particle with postion concentration and velocity
+class particle:
+   def __init__(x,v,c):
+       particle.x = x
+       particle.v = v
+       particle.c = c 
+
+
+#Create a list of prticles on regular rid betwee  x = -1 and 1 
+h = 0.2
+N = np.floor(2/h)
+ParticleList = []
+for i in range(N):
+    x = -1.0 + i*h
+    v = 0.2
+    c = cos(x*np.pi*0.5)**2.0
+    ParticleList.append(particle(x,v,c))
+    
+
+#Simulate 
+dt = 0.1
+for particle in ParticleList:
+    particle.x = particle.x - particle.v*dt
+    if particle.x > 1.0:
+        particle.x = particle.x - 2.0
+    if particle.x < -1.0:
+        particle.x = particle.x + 2.0
