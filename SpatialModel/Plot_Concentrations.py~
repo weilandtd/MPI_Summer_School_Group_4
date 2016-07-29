@@ -1,0 +1,17 @@
+import numpy as np 
+import matplotlib.pyplot as plt
+
+Nt = 10 
+
+folder = "Test1"
+Timeseries = []
+for i in range(Nt):
+    Data = np.loadtxt(folder+"/timestep_%d.txt"%(i))
+    plt.plot(Data[:,0], Data[:,2] )
+    #Timeseries.append(Data)
+    
+
+#Timeseries = np.array(Timeseries)
+plt.show()
+
+
