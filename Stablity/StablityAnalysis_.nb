@@ -1,0 +1,674 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.4' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     23587,        664]
+NotebookOptionsPosition[     22045,        609]
+NotebookOutlinePosition[     22381,        624]
+CellTagsIndexPosition[     22338,        621]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{"dAdt", " ", "=", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", "koffA"}], " ", "*", "A"}], " ", "+", " ", 
+   RowBox[{"konA", " ", "*", " ", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"NA", " ", "-", " ", 
+       RowBox[{"A", "*", "omega"}]}], " ", ")"}], "/", "V"}]}], " ", "-", 
+   RowBox[{"KAP", "*", 
+    RowBox[{"P", "^", "alpha"}], "*", " ", "A"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"dPdt", " ", "=", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", "koffP"}], " ", "*", "P"}], " ", "+", " ", 
+   RowBox[{"konP", " ", "*", " ", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"NP", " ", "-", " ", 
+       RowBox[{"P", "*", "omega"}]}], " ", ")"}], "/", "V"}]}], " ", "-", 
+   RowBox[{"KPA", "*", "P", "*", " ", 
+    RowBox[{"A", "^", "beta"}]}]}]}]}], "Input",
+ CellChangeTimes->{{3.678604878706018*^9, 3.678604890299612*^9}, {
+   3.678605004159224*^9, 3.678605192205701*^9}, {3.6786066957114563`*^9, 
+   3.678606696364159*^9}, 3.678607449565487*^9, 3.6786900576065893`*^9, 
+   3.6786903727630463`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"-", "A"}], " ", "koffA"}], "-", 
+  RowBox[{"A", " ", "KAP", " ", 
+   SuperscriptBox["P", "alpha"]}], "+", 
+  FractionBox[
+   RowBox[{"konA", " ", 
+    RowBox[{"(", 
+     RowBox[{"NA", "-", 
+      RowBox[{"A", " ", "omega"}]}], ")"}]}], "V"]}]], "Output",
+ CellChangeTimes->{
+  3.67869000808356*^9, {3.678690358951302*^9, 3.678690373672914*^9}, 
+   3.6786905839606*^9, 3.678690631524308*^9, 3.678690970200157*^9, 
+   3.6786911387515717`*^9, 3.678691300400435*^9, {3.678706895500227*^9, 
+   3.678706923289386*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"-", "koffP"}], " ", "P"}], "-", 
+  RowBox[{
+   SuperscriptBox["A", "beta"], " ", "KPA", " ", "P"}], "+", 
+  FractionBox[
+   RowBox[{"konP", " ", 
+    RowBox[{"(", 
+     RowBox[{"NP", "-", 
+      RowBox[{"omega", " ", "P"}]}], ")"}]}], "V"]}]], "Output",
+ CellChangeTimes->{
+  3.67869000808356*^9, {3.678690358951302*^9, 3.678690373672914*^9}, 
+   3.6786905839606*^9, 3.678690631524308*^9, 3.678690970200157*^9, 
+   3.6786911387515717`*^9, 3.678691300400435*^9, {3.678706895500227*^9, 
+   3.678706923291432*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{"dAdt", "\[Equal]", "0"}], " ", ",", "P"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6786898985809307`*^9, 3.67868991374508*^9}, {
+  3.678689992854802*^9, 3.678690038268362*^9}, {3.67869007663759*^9, 
+  3.678690078857696*^9}, {3.678690941281824*^9, 3.678690941656793*^9}, {
+  3.6786911850859623`*^9, 3.678691210888842*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Solve", "::", "ifun"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Inverse functions are being used by \
+\[NoBreak]\\!\\(\\*RowBox[{\\\"Solve\\\"}]\\)\[NoBreak], so some solutions \
+may not be found; use Reduce for complete solution information. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/Solve/ifun\\\", \
+ButtonNote -> \\\"Solve::ifun\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{
+  3.6786913015216827`*^9, {3.6787068959594383`*^9, 3.678706924590218*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{"P", "\[Rule]", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      FractionBox[
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "A"}], " ", "koffA"}], "+", 
+        FractionBox[
+         RowBox[{"konA", " ", "NA"}], "V"], "-", 
+        FractionBox[
+         RowBox[{"A", " ", "konA", " ", "omega"}], "V"]}], 
+       RowBox[{"A", " ", "KAP"}]], ")"}], 
+     FractionBox["1", "alpha"]]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.678690079108124*^9, {3.678690360083557*^9, 3.678690374900415*^9}, 
+   3.678690586073516*^9, 3.678690631645401*^9, {3.678690942113349*^9, 
+   3.678690971632804*^9}, 3.678691141289546*^9, 3.678691186389799*^9, 
+   3.678691301523871*^9, {3.678706895962192*^9, 3.678706924591653*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{"dPdt", "\[Equal]", "0"}], " ", ",", "P", ",", " ", "Reals"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.678690088088526*^9, 3.678690099884946*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{"P", "\[Rule]", 
+    RowBox[{"-", 
+     FractionBox[
+      RowBox[{"konP", " ", "NP"}], 
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "konP"}], " ", "omega"}], "-", 
+       RowBox[{"koffP", " ", "V"}], "-", 
+       RowBox[{
+        SuperscriptBox["A", "beta"], " ", "KPA", " ", "V"}]}]]}]}], "}"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.678690100521576*^9, {3.678690361635207*^9, 3.678690375837764*^9}, 
+   3.678690586727619*^9, 3.67869063168801*^9, {3.678690966848733*^9, 
+   3.678690974134554*^9}, 3.678691191930511*^9, 3.678691308269506*^9, {
+   3.678706896010495*^9, 3.678706925702757*^9}}]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"alpha", " ", "=", " ", "2.0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"beta", " ", "=", " ", "2.0"}], ";"}]}], "Input",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGAQA2IQvU2u7Ud3xmvHHXYzf4PoJX2PnHqA9K59z8H03sez
+S0H0qb4PYNpuq8EcED3lmR2Y9nHJeAqiY8LqwbTF5CCRXpA5U+eAafn0I2og
+uijxOphmzg3RAdFJa2PB9Lq9CpUgmsU3E0yvi4xrBNEbNhSBabXzUW0gWule
+K5hu7tA4CqIfbK8C0zGlgismA2kmoVAw/aG7bhOYFn8Bpi/FLd4Foo/VXwTT
+DVriB0D0eQVlML3mT8IREL3HYQGYDmdjewOiU05KgenKvRe+geibnQbfwepk
+FzBMAfnj3j0wrfKebTGI/nzSbxmIvrrvoPpUIF328SyYBgC7/rtu
+  "]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"V", " ", "=", " ", 
+   RowBox[{"2.5", "*", 
+    RowBox[{"10", "^", "4"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"omega", " ", "=", " ", 
+   RowBox[{"4.4", "*", 
+    RowBox[{"10", "^", "3"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"NA", "  ", "=", " ", 
+   RowBox[{"2.5", "*", 
+    RowBox[{"10", "^", "5"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"NP", "  ", "=", " ", 
+   RowBox[{"9.8", "*", 
+    RowBox[{"10", "^", "4"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"koffA", " ", "=", " ", 
+   RowBox[{"3.24", "*", 
+    RowBox[{"10", "^", 
+     RowBox[{"-", "3"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"koffP", " ", "=", " ", 
+   RowBox[{"7.19", "*", 
+    RowBox[{"10", "^", 
+     RowBox[{"-", "3"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"konA", "   ", "=", "  ", 
+   RowBox[{"6.29", "*", 
+    RowBox[{"10", "^", 
+     RowBox[{"-", "3"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"konP", "   ", "=", " ", 
+   RowBox[{"7.682", " ", "*", " ", 
+    RowBox[{"10", "^", 
+     RowBox[{"-", "2"}]}]}]}], ";"}]}], "Input",
+ CellChangeTimes->{3.6786906218339376`*^9, 3.6786907382432137`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Manipulate", "[", 
+   RowBox[{
+    RowBox[{"Plot", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"(", 
+          FractionBox[
+           RowBox[{
+            RowBox[{
+             RowBox[{"-", "A"}], " ", "koffA"}], "+", 
+            FractionBox[
+             RowBox[{"konA", " ", "NA"}], "V"], "-", 
+            FractionBox[
+             RowBox[{"A", " ", "konA", " ", "omega"}], "V"]}], 
+           RowBox[{"A", " ", "KAP"}]], ")"}], 
+         FractionBox["1", "alpha"]], " ", ",", 
+        RowBox[{"-", 
+         FractionBox[
+          RowBox[{"konP", " ", "NP"}], 
+          RowBox[{
+           RowBox[{
+            RowBox[{"-", "konP"}], " ", "omega"}], "-", 
+           RowBox[{"koffP", " ", "V"}], "-", 
+           RowBox[{
+            SuperscriptBox["A", "beta"], " ", "KPA", " ", "V"}]}]]}]}], "}"}],
+       ",", 
+      RowBox[{"{", 
+       RowBox[{"A", ",", "0.000001", ",", "25"}], "}"}], ",", " ", 
+      RowBox[{"PlotRange", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "20"}], "}"}]}]}], "]"}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"KPA", ",", " ", 
+      RowBox[{"10", "^", 
+       RowBox[{"-", "6"}]}], ",", "0.1"}], "}"}], " ", ",", 
+    RowBox[{"{", 
+     RowBox[{"KAP", " ", ",", " ", 
+      RowBox[{"10", "^", 
+       RowBox[{"-", "6"}]}], " ", ",", "0.01"}], "}"}]}], "]"}], 
+  "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{
+  3.6786864631905537`*^9, {3.678686503831395*^9, 3.678686527827693*^9}, {
+   3.6786865702611217`*^9, 3.678686597307066*^9}, 3.678686811615172*^9, {
+   3.6786902100543823`*^9, 3.678690225431617*^9}, {3.678690294188308*^9, 
+   3.678690307278552*^9}, {3.678690385915411*^9, 3.6786904979211884`*^9}, {
+   3.678690764572989*^9, 3.678690812751143*^9}, 3.678691125034169*^9, {
+   3.678691218699621*^9, 3.6786912531964407`*^9}, {3.678691317174243*^9, 
+   3.678691325149006*^9}, {3.678691364920228*^9, 3.6786914885882998`*^9}, {
+   3.678691551928606*^9, 3.6786915532223253`*^9}, {3.678691619099842*^9, 
+   3.678691652995517*^9}, {3.678691711444059*^9, 3.678691729222725*^9}, {
+   3.678692142450295*^9, 3.6786921455498543`*^9}, {3.678692435609847*^9, 
+   3.678692443467421*^9}, {3.678692494888446*^9, 3.678692495389593*^9}, {
+   3.6786927198564167`*^9, 3.678692786823483*^9}, {3.678692993658482*^9, 
+   3.678693030915312*^9}, {3.6786932058244658`*^9, 3.678693208264429*^9}, {
+   3.678693393918255*^9, 3.678693394089436*^9}, {3.678693743002421*^9, 
+   3.678693777295381*^9}, {3.6786940861347437`*^9, 3.678694094259638*^9}, {
+   3.678694150565851*^9, 3.67869419963684*^9}, {3.678694256169579*^9, 
+   3.678694257525333*^9}, {3.6786943662853813`*^9, 3.678694367891411*^9}, {
+   3.678694521568472*^9, 3.678694591709421*^9}, {3.678706963972062*^9, 
+   3.678706967507638*^9}, {3.678707294773779*^9, 3.678707317587902*^9}, {
+   3.678707398141803*^9, 3.678707399394183*^9}, {3.67870905758008*^9, 
+   3.678709078003622*^9}, 3.678709856757443*^9, {3.6787100104273148`*^9, 
+   3.678710013884921*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`KAP$$ = 0.00080092, $CellContext`KPA$$ = 
+    0.0040009600000000005`, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`KPA$$], 
+      Rational[1, 1000000], 0.1}, {
+      Hold[$CellContext`KAP$$], 
+      Rational[1, 1000000], 0.01}}, Typeset`size$$ = {360., {117., 123.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`KPA$550$$ = 0, $CellContext`KAP$555$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`KAP$$ = 
+        Rational[1, 1000000], $CellContext`KPA$$ = Rational[1, 1000000]}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`KPA$$, $CellContext`KPA$550$$, 0], 
+        Hold[$CellContext`KAP$$, $CellContext`KAP$555$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Plot[{(((-$CellContext`A) $CellContext`koffA + $CellContext`konA \
+$CellContext`NA/$CellContext`V - $CellContext`A $CellContext`konA \
+$CellContext`omega/$CellContext`V)/($CellContext`A $CellContext`KAP$$))^(
+          1/$CellContext`alpha), -($CellContext`konP \
+$CellContext`NP/((-$CellContext`konP) $CellContext`omega - $CellContext`koffP \
+$CellContext`V - $CellContext`A^$CellContext`beta $CellContext`KPA$$ \
+$CellContext`V))}, {$CellContext`A, 1.*^-6, 25}, PlotRange -> {0, 20}], 
+      "Specifications" :> {{$CellContext`KPA$$, 
+         Rational[1, 1000000], 0.1}, {$CellContext`KAP$$, 
+         Rational[1, 1000000], 0.01}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{407., {195., 202.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.678694960703684*^9, 3.6787068961812067`*^9, {3.678706932651709*^9, 
+   3.678706970344717*^9}, 3.6787070141172333`*^9, 3.678707100227339*^9, 
+   3.678707164508933*^9, 3.6787072058963537`*^9, 3.678707240880558*^9, {
+   3.678707298174097*^9, 3.678707318986993*^9}, 3.678707400216496*^9, 
+   3.678707522871241*^9, 3.6787075570571527`*^9, 3.6787076454151497`*^9, {
+   3.678707723150052*^9, 3.678707732838048*^9}, {3.678709045475781*^9, 
+   3.678709063154682*^9}, 3.6787100152509327`*^9, 3.678710082450688*^9, 
+   3.678711431178111*^9, 3.67871149332731*^9}]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"KAP", " ", "=", " ", "0.0008"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"KPA", " ", "=", " ", "0.004"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.678710369379465*^9, 3.6787103924726753`*^9}, {
+  3.67871053124227*^9, 3.6787106545381813`*^9}, {3.678710984926396*^9, 
+  3.6787109954074993`*^9}, {3.678711462563014*^9, 3.678711479817995*^9}, {
+  3.678711518828618*^9, 3.678711530312072*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{" ", 
+  RowBox[{"Solve", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{"(", 
+        FractionBox[
+         RowBox[{
+          RowBox[{
+           RowBox[{"-", "A"}], " ", "koffA"}], "+", 
+          FractionBox[
+           RowBox[{"konA", " ", "NA"}], "V"], "-", 
+          FractionBox[
+           RowBox[{"A", " ", "konA", " ", "omega"}], "V"]}], 
+         RowBox[{"A", " ", "KAP"}]], ")"}], 
+       FractionBox["1", "alpha"]], " ", "==", 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"konP", " ", "NP"}], 
+        RowBox[{
+         RowBox[{
+          RowBox[{"-", "konP"}], " ", "omega"}], "-", 
+         RowBox[{"koffP", " ", "V"}], "-", 
+         RowBox[{
+          SuperscriptBox["A", "beta"], " ", "KPA", " ", "V"}]}]]}]}], " ", "&&",
+      " ", 
+     RowBox[{"A", " ", ">", " ", "0"}]}], ",", " ", "A"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.678710397123427*^9, 3.6787104501665373`*^9}, {
+  3.678711390550609*^9, 3.678711398171486*^9}, {3.678711536495235*^9, 
+  3.678711536878118*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Solve", "::", "ratnz"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Solve was unable to solve the system with inexact \
+coefficients. The answer was obtained by solving a corresponding exact system \
+and numericizing the result. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/Solve\\\", ButtonNote -> \
+\\\"Solve::ratnz\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.678710515275403*^9, 3.678710656032133*^9}, {
+   3.6787109874137774`*^9, 3.6787109972224207`*^9}, 3.678711399231379*^9, 
+   3.678711537868281*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"A", "\[Rule]", "0.3828372945195081`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"A", "\[Rule]", "3.7156746020236033`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"A", "\[Rule]", "14.117446289230926`"}], "}"}]}], "}"}]], "Output",\
+
+ CellChangeTimes->{
+  3.678710429548555*^9, {3.678710515277658*^9, 3.678710656033896*^9}, {
+   3.678710987416913*^9, 3.678710997224209*^9}, 3.678711399233169*^9, 
+   3.678711537869549*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"A", " ", "=", " ", "0.3828372945195081`"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"P", " ", "=", 
+   RowBox[{"-", 
+    FractionBox[
+     RowBox[{"konP", " ", "NP"}], 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "konP"}], " ", "omega"}], "-", 
+      RowBox[{"koffP", " ", "V"}], "-", 
+      RowBox[{
+       SuperscriptBox["A", "beta"], " ", "KPA", " ", "V"}]}]]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"trac", " ", "=", " ", 
+  RowBox[{
+   RowBox[{"-", "koffA"}], "-", "koffP", "-", 
+   RowBox[{"A", " ", "KPA"}], "-", 
+   RowBox[{"KAP", " ", "P"}], "-", 
+   FractionBox[
+    RowBox[{"konA", " ", "omega"}], "V"], "-", 
+   FractionBox[
+    RowBox[{"konP", " ", "omega"}], "V"]}]}], "\[IndentingNewLine]", 
+ RowBox[{"det", "  ", "=", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", "A"}], " ", "KAP", " ", "KPA", " ", "P"}], "+", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", "koffA"}], "-", 
+      RowBox[{"KAP", " ", "P"}], "-", 
+      FractionBox[
+       RowBox[{"konA", " ", "omega"}], "V"]}], ")"}], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", "koffP"}], "-", 
+      RowBox[{"A", " ", "KPA"}], "-", 
+      FractionBox[
+       RowBox[{"konP", " ", "omega"}], "V"]}], ")"}]}]}]}]}], "Input",
+ CellChangeTimes->{{3.678711056259837*^9, 3.678711065357498*^9}, {
+   3.6787111503131638`*^9, 3.678711176481818*^9}, {3.67871126466609*^9, 
+   3.678711291493997*^9}, 3.678711544639555*^9}],
+
+Cell[BoxData[
+ RowBox[{"-", "0.037900738969573466`"}]], "Output",
+ CellChangeTimes->{
+  3.67871106606594*^9, {3.67871127118948*^9, 3.678711291855404*^9}, 
+   3.6787115462617483`*^9}],
+
+Cell[BoxData["0.00033096118241527614`"], "Output",
+ CellChangeTimes->{
+  3.67871106606594*^9, {3.67871127118948*^9, 3.678711291855404*^9}, 
+   3.678711546262926*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.67871119515551*^9, 3.678711201200315*^9}, 
+   3.678711308290373*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"A", " ", "=", " ", "3.7156746020236033"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"P", " ", "=", " ", 
+   RowBox[{"-", 
+    FractionBox[
+     RowBox[{"konP", " ", "NP"}], 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "konP"}], " ", "omega"}], "-", 
+      RowBox[{"koffP", " ", "V"}], "-", 
+      RowBox[{
+       SuperscriptBox["A", "beta"], " ", "KPA", " ", "V"}]}]]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"trac", " ", "=", " ", 
+  RowBox[{
+   RowBox[{"-", "koffA"}], "-", "koffP", "-", 
+   RowBox[{"A", " ", "KPA"}], "-", 
+   RowBox[{"KAP", " ", "P"}], "-", 
+   FractionBox[
+    RowBox[{"konA", " ", "omega"}], "V"], "-", 
+   FractionBox[
+    RowBox[{"konP", " ", "omega"}], "V"]}]}], "\[IndentingNewLine]", 
+ RowBox[{"det", "  ", "=", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", "A"}], " ", "KAP", " ", "KPA", " ", "P"}], "+", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", "koffA"}], "-", 
+      RowBox[{"KAP", " ", "P"}], "-", 
+      FractionBox[
+       RowBox[{"konA", " ", "omega"}], "V"]}], ")"}], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", "koffP"}], "-", 
+      RowBox[{"A", " ", "KPA"}], "-", 
+      FractionBox[
+       RowBox[{"konP", " ", "omega"}], "V"]}], ")"}]}]}]}]}], "Input",
+ CellChangeTimes->{{3.678711073242058*^9, 3.678711087810422*^9}, {
+  3.678711153149098*^9, 3.6787111790708313`*^9}, {3.678711236514701*^9, 
+  3.678711259297847*^9}, {3.6787113089561768`*^9, 3.678711313259087*^9}, {
+  3.678711554299942*^9, 3.678711555511674*^9}}],
+
+Cell[BoxData[
+ RowBox[{"-", "0.043092596240004125`"}]], "Output",
+ CellChangeTimes->{{3.678711081039412*^9, 3.678711088707069*^9}, 
+   3.6787113144052467`*^9, 3.678711555879726*^9}],
+
+Cell[BoxData["0.00022034160765167898`"], "Output",
+ CellChangeTimes->{{3.678711081039412*^9, 3.678711088707069*^9}, 
+   3.6787113144052467`*^9, 3.678711555882052*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.678711211433423*^9, 3.678711232690048*^9}, {
+  3.6787113211601963`*^9, 3.678711327944804*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"A", " ", "=", " ", "14.117446289230926"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"P", " ", "=", " ", 
+   RowBox[{"-", 
+    FractionBox[
+     RowBox[{"konP", " ", "NP"}], 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "konP"}], " ", "omega"}], "-", 
+      RowBox[{"koffP", " ", "V"}], "-", 
+      RowBox[{
+       SuperscriptBox["A", "beta"], " ", "KPA", " ", "V"}]}]]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"trac", " ", "=", " ", 
+  RowBox[{
+   RowBox[{"-", "koffA"}], "-", "koffP", "-", 
+   RowBox[{"A", " ", "KPA"}], "-", 
+   RowBox[{"KAP", " ", "P"}], "-", 
+   FractionBox[
+    RowBox[{"konA", " ", "omega"}], "V"], "-", 
+   FractionBox[
+    RowBox[{"konP", " ", "omega"}], "V"]}]}], "\[IndentingNewLine]", 
+ RowBox[{"det", "  ", "=", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", "A"}], " ", "KAP", " ", "KPA", " ", "P"}], "+", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", "koffA"}], "-", 
+      RowBox[{"KAP", " ", "P"}], "-", 
+      FractionBox[
+       RowBox[{"konA", " ", "omega"}], "V"]}], ")"}], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", "koffP"}], "-", 
+      RowBox[{"A", " ", "KPA"}], "-", 
+      FractionBox[
+       RowBox[{"konP", " ", "omega"}], "V"]}], ")"}]}]}]}]}], "Input",
+ CellChangeTimes->{{3.678711094789871*^9, 3.678711101631769*^9}, {
+  3.678711161172019*^9, 3.678711182555938*^9}, {3.6787112675987883`*^9, 
+  3.6787112691785593`*^9}, {3.6787113240341883`*^9, 3.6787113355224047`*^9}, {
+  3.678711566990418*^9, 3.6787115680022507`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"-", "0.08182168212078095`"}]], "Output",
+ CellChangeTimes->{
+  3.67871110307987*^9, {3.678711330775069*^9, 3.678711335867137*^9}, 
+   3.678711568345409*^9}],
+
+Cell[BoxData["0.00034160495909466574`"], "Output",
+ CellChangeTimes->{
+  3.67871110307987*^9, {3.678711330775069*^9, 3.678711335867137*^9}, 
+   3.678711568347228*^9}]
+}, Open  ]]
+},
+WindowSize->{805, 621},
+WindowMargins->{{Automatic, 212}, {32, Automatic}},
+FrontEndVersion->"10.4 for Linux x86 (64-bit) (April 11, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 1036, 26, 52, "Input"],
+Cell[1619, 50, 559, 15, 48, "Output"],
+Cell[2181, 67, 558, 15, 48, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2776, 87, 381, 7, 31, "Input"],
+Cell[3160, 96, 605, 12, 41, "Message"],
+Cell[3768, 110, 774, 20, 74, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4579, 135, 208, 5, 31, "Input"],
+Cell[4790, 142, 664, 18, 51, "Output"]
+}, Open  ]],
+Cell[5469, 163, 569, 12, 52, "Input"],
+Cell[6041, 177, 1235, 37, 172, "Input"],
+Cell[CellGroupData[{
+Cell[7301, 218, 3037, 66, 233, "Input"],
+Cell[10341, 286, 2979, 56, 414, "Output"]
+}, Open  ]],
+Cell[13335, 345, 434, 8, 52, "Input"],
+Cell[CellGroupData[{
+Cell[13794, 357, 1065, 31, 159, "Input"],
+Cell[14862, 390, 649, 13, 58, "Message"],
+Cell[15514, 405, 493, 13, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16044, 423, 1475, 44, 182, "Input"],
+Cell[17522, 469, 182, 4, 31, "Output"],
+Cell[17707, 475, 165, 3, 31, "Output"]
+}, Open  ]],
+Cell[17887, 481, 117, 2, 31, "Input"],
+Cell[CellGroupData[{
+Cell[18029, 487, 1553, 45, 182, "Input"],
+Cell[19585, 534, 181, 3, 31, "Output"],
+Cell[19769, 539, 166, 2, 31, "Output"]
+}, Open  ]],
+Cell[19950, 544, 143, 2, 31, "Input"],
+Cell[CellGroupData[{
+Cell[20118, 550, 1559, 45, 182, "Input"],
+Cell[21680, 597, 180, 4, 31, "Output"],
+Cell[21863, 603, 166, 3, 31, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
